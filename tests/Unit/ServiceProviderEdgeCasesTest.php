@@ -46,7 +46,7 @@ it('can handle complex unleash configurations', function () {
         'unleash.api_key' => 'test-key',
         'unleash.cache.enabled' => true,
         'unleash.http_client_override.enabled' => true,
-        'unleash.automatic_registration' => true,
+        'unleash.automatic_registration' => false, // Disable to avoid network calls in tests
         'unleash.metrics' => true,
     ]);
 

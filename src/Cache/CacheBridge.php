@@ -12,22 +12,22 @@ use Psr\SimpleCache\CacheInterface;
 class CacheBridge implements CacheInterface
 {
     /**
-     * @param $key
+     * @param string $key
      * @param  mixed  $default
      * @return mixed
      */
-    public function get($key, mixed $default = null): mixed
+    public function get($key, $default = null)
     {
         return Cache::get($key, $default);
     }
 
     /**
-     * @param $key
-     * @param $value
+     * @param string $key
+     * @param mixed $value
      * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function set($key, $value, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
+    public function set($key, $value, $ttl = null): bool
     {
         Cache::put($key, $value, $ttl);
 
@@ -52,11 +52,11 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param array $keys
+     * @param iterable $keys
      * @param  mixed  $default
      * @return array
      */
-    public function getMultiple($keys, mixed $default = null): array
+    public function getMultiple($keys, $default = null): array
     {
         $values = Cache::many($keys);
 
@@ -71,11 +71,11 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param array $values
+     * @param iterable $values
      * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function setMultiple($values, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
+    public function setMultiple($values, $ttl = null): bool
     {
         Cache::putMany($values, $ttl);
 

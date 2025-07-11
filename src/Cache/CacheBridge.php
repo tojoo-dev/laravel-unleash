@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Cache;
+namespace Tojoo\Unleash\Cache;
 
 use Illuminate\Support\Facades\Cache;
 use Psr\SimpleCache\CacheInterface;
@@ -13,10 +13,10 @@ class CacheBridge implements CacheInterface
 {
     /**
      * @param $key
-     * @param  null  $default
+     * @param  mixed  $default
      * @return mixed
      */
-    public function get($key, $default = null): mixed
+    public function get($key, mixed $default = null): mixed
     {
         return Cache::get($key, $default);
     }
@@ -24,10 +24,10 @@ class CacheBridge implements CacheInterface
     /**
      * @param $key
      * @param $value
-     * @param  null  $ttl
+     * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function set($key, $value, $ttl = null): bool
+    public function set($key, $value, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
     {
         Cache::put($key, $value, $ttl);
 
@@ -53,20 +53,29 @@ class CacheBridge implements CacheInterface
 
     /**
      * @param array $keys
-     * @param  null  $default
+     * @param  mixed  $default
      * @return array
      */
-    public function getMultiple($keys, $default = null): array
+    public function getMultiple($keys, mixed $default = null): array
     {
-        return Cache::many($keys);
+        $values = Cache::many($keys);
+
+        // Replace null values with the default value
+        foreach ($keys as $key) {
+            if (! isset($values[$key])) {
+                $values[$key] = $default;
+            }
+        }
+
+        return $values;
     }
 
     /**
      * @param array $values
-     * @param  null  $ttl
+     * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function setMultiple($values, $ttl = null): bool
+    public function setMultiple($values, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
     {
         Cache::putMany($values, $ttl);
 
@@ -81,6 +90,8 @@ class CacheBridge implements CacheInterface
         foreach ($keys as $key) {
             $this->delete($key);
         }
+
+        return true;
     }
 
     /**

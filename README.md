@@ -194,3 +194,44 @@ Or if a feature is **disabled**:
     <p>Enroll now to be a beta tester.</p>
 @endfeatureDisabled
 ```
+
+## Testing
+
+This package uses [Pest](https://pestphp.com/) for testing with comprehensive test coverage.
+
+### Running Tests
+
+```bash
+# Run all tests
+composer test
+
+# Run tests with coverage
+composer test-coverage
+
+# Run tests with HTML coverage report
+composer test-coverage-html
+```
+
+### Test Structure
+
+- **Unit Tests**: Located in `tests/Unit/` - test individual classes and methods
+- **Feature Tests**: Located in `tests/Feature/` - test integration and full workflows
+- **Coverage**: Aims for 100% code coverage
+
+### Adding Tests
+
+When contributing, please ensure:
+
+1. All new code is covered by tests
+2. Tests follow the existing naming conventions
+3. Use descriptive test names that explain what is being tested
+4. Mock external dependencies appropriately
+
+### Continuous Integration
+
+The package uses GitHub Actions for:
+
+- **Tests**: Run on PHP 8.1, 8.2, 8.3 with Laravel 10.x, 11.x
+- **Static Analysis**: PHPStan analysis for code quality
+- **Code Style**: PHP-CS-Fixer for consistent formatting
+- **Coverage**: Code coverage reporting via Codecov

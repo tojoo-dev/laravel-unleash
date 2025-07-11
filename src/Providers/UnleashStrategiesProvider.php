@@ -1,19 +1,15 @@
 <?php
 
-namespace JWebb\Unleash\Providers;
+namespace Tojoo\Unleash\Providers;
 
-use JWebb\Unleash\Interfaces\UnleashStrategiesProviderInterface;
+use Tojoo\Unleash\Interfaces\UnleashStrategiesProviderInterface;
 use Unleash\Client\Stickiness\MurmurHashCalculator;
 use Unleash\Client\Strategy\AbstractStrategyHandler;
 use Unleash\Client\Strategy\ApplicationHostnameStrategyHandler;
 use Unleash\Client\Strategy\DefaultStrategyHandler;
-use Unleash\Client\Strategy\GradualRolloutRandomStrategyHandler;
-use Unleash\Client\Strategy\GradualRolloutSessionIdStrategyHandler;
 use Unleash\Client\Strategy\GradualRolloutStrategyHandler;
-use Unleash\Client\Strategy\GradualRolloutUserIdStrategyHandler;
 use Unleash\Client\Strategy\IpAddressStrategyHandler;
 use Unleash\Client\Strategy\UserIdStrategyHandler;
-use Unleash\Strategy\StrategyHandler;
 
 class UnleashStrategiesProvider implements UnleashStrategiesProviderInterface
 {

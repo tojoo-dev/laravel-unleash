@@ -1,8 +1,8 @@
 <?php
 
-namespace JWebb\Unleash\Cache;
+namespace Tojoo\Unleash\Cache;
 
-use JWebb\Unleash\Interfaces\UnleashCacheHandlerInterface;
+use Tojoo\Unleash\Interfaces\UnleashCacheHandlerInterface;
 
 class CacheHandler implements UnleashCacheHandlerInterface
 {

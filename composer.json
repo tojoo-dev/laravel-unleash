@@ -1,11 +1,11 @@
 {
-    "name": "j-webb/laravel-unleash",
+    "name": "tojoo/laravel-unleash",
     "description": "An Unleash client for Laravel",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^7",
-        "illuminate/support": "^6|^7|^8|^9|^10.0|^11.0",
-        "illuminate/http": "^6|^7|^8|^9|^10.0|^11.0",
+        "illuminate/support": "^6|^7|^8|^9|^10.0|^11.0|^12.0",
+        "illuminate/http": "^6|^7|^8|^9|^10.0|^11.0|^12.0",
         "unleash/client": "^1",
         "symfony/cache": "^5.3|^6.1",
         "psr/cache": "^1.0|^2.0|^3.0",
@@ -28,6 +28,11 @@
             "providers": [
                 "JWebb\\Unleash\\Providers\\ServiceProvider"
             ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
         }
     }
 }

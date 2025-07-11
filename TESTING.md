@@ -99,7 +99,7 @@ The test suite aims for 100% code coverage across:
 
 ### 1. Tests (`tests.yml`)
 
-- **Matrix Testing**: PHP 8.1, 8.2, 8.3 × Laravel 10.x, 11.x, 12.x
+- **Matrix Testing**: PHP 8.1, 8.2, 8.3 × Laravel 10.x, 11.x
 - **Stability Testing**: prefer-lowest and prefer-stable
 - **Coverage Requirement**: Minimum 90% coverage
 - **Coverage Reporting**: Codecov integration

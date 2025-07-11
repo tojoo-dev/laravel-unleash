@@ -16,7 +16,7 @@ class CacheBridge implements CacheInterface
      * @param  mixed  $default
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         return Cache::get($key, $default);
     }
@@ -27,7 +27,7 @@ class CacheBridge implements CacheInterface
      * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function set($key, $value, $ttl = null): bool
+    public function set(string $key, mixed $value, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
     {
         Cache::put($key, $value, $ttl);
 
@@ -35,10 +35,10 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function delete($key): bool
+    public function delete(string $key): bool
     {
         return Cache::forget($key);
     }
@@ -56,7 +56,7 @@ class CacheBridge implements CacheInterface
      * @param  mixed  $default
      * @return array
      */
-    public function getMultiple($keys, $default = null): array
+    public function getMultiple(iterable $keys, mixed $default = null): iterable
     {
         $values = Cache::many($keys);
 
@@ -75,7 +75,7 @@ class CacheBridge implements CacheInterface
      * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
      * @return bool
      */
-    public function setMultiple($values, $ttl = null): bool
+    public function setMultiple(iterable $values, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
     {
         Cache::putMany($values, $ttl);
 
@@ -83,9 +83,9 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param array $keys
+     * @param iterable $keys
      */
-    public function deleteMultiple($keys): bool
+    public function deleteMultiple(iterable $keys): bool
     {
         foreach ($keys as $key) {
             $this->delete($key);
@@ -95,10 +95,10 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
-    public function has($key): bool
+    public function has(string $key): bool
     {
         return Cache::has($key);
     }

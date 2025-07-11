@@ -8,26 +8,23 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * Thanks to leo108 for the `SimpleCacheBridge.php` gist
  * https://gist.github.com/leo108/bd7559654c52000cc9774a80b072c629
+ * 
+ * Compatible with PSR SimpleCache 1.0, 2.0, and 3.0
  */
 class CacheBridge implements CacheInterface
 {
     /**
-     * @param string $key
-     * @param  mixed  $default
-     * @return mixed
+     * Get cache value
      */
-    public function get(string $key, mixed $default = null): mixed
+    public function get($key, $default = null)
     {
         return Cache::get($key, $default);
     }
 
     /**
-     * @param string $key
-     * @param mixed $value
-     * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
-     * @return bool
+     * Set cache value
      */
-    public function set(string $key, mixed $value, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
+    public function set($key, $value, $ttl = null): bool
     {
         Cache::put($key, $value, $ttl);
 
@@ -35,10 +32,9 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * Delete cache key
      */
-    public function delete(string $key): bool
+    public function delete($key): bool
     {
         return Cache::forget($key);
     }
@@ -52,16 +48,15 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param iterable $keys
-     * @param  mixed  $default
-     * @return array
+     * Get multiple cache values
      */
-    public function getMultiple(iterable $keys, mixed $default = null): iterable
+    public function getMultiple($keys, $default = null): iterable
     {
-        $values = Cache::many($keys);
+        $keysArray = is_array($keys) ? $keys : iterator_to_array($keys);
+        $values = Cache::many($keysArray);
 
         // Replace null values with the default value
-        foreach ($keys as $key) {
+        foreach ($keysArray as $key) {
             if (! isset($values[$key])) {
                 $values[$key] = $default;
             }
@@ -71,21 +66,20 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param iterable $values
-     * @param  \DateInterval|\DateTimeInterface|int|null  $ttl
-     * @return bool
+     * Set multiple cache values
      */
-    public function setMultiple(iterable $values, \DateInterval|\DateTimeInterface|int|null $ttl = null): bool
+    public function setMultiple($values, $ttl = null): bool
     {
-        Cache::putMany($values, $ttl);
+        $valuesArray = is_array($values) ? $values : iterator_to_array($values);
+        Cache::putMany($valuesArray, $ttl);
 
         return true;
     }
 
     /**
-     * @param iterable $keys
+     * Delete multiple cache keys
      */
-    public function deleteMultiple(iterable $keys): bool
+    public function deleteMultiple($keys): bool
     {
         foreach ($keys as $key) {
             $this->delete($key);
@@ -95,10 +89,9 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * Check if cache key exists
      */
-    public function has(string $key): bool
+    public function has($key): bool
     {
         return Cache::has($key);
     }

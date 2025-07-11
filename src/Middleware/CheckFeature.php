@@ -1,9 +1,9 @@
 <?php
 
-namespace JWebb\Unleash\Middleware;
+namespace Tojoo\Unleash\Middleware;
 
 use Closure;
-use JWebb\Unleash\Unleash;
+use Tojoo\Unleash\Unleash;
 
 class CheckFeature
 {

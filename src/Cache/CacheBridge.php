@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Cache;
+namespace Tojoo\Unleash\Cache;
 
 use Illuminate\Support\Facades\Cache;
 use Psr\SimpleCache\CacheInterface;

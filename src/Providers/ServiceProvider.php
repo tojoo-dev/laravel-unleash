@@ -1,12 +1,12 @@
 <?php
 
-namespace JWebb\Unleash\Providers;
+namespace Tojoo\Unleash\Providers;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use JWebb\Unleash\Interfaces\UnleashCacheHandlerInterface;
-use JWebb\Unleash\Unleash;
+use Tojoo\Unleash\Interfaces\UnleashCacheHandlerInterface;
+use Tojoo\Unleash\Unleash;
 use Unleash\Client\UnleashBuilder;
 
 class ServiceProvider extends IlluminateServiceProvider

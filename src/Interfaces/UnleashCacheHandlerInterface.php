@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Interfaces;
+namespace Tojoo\Unleash\Interfaces;
 
 interface UnleashCacheHandlerInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Providers;
+namespace Tojoo\Unleash\Providers;
 
 use Illuminate\Support\Facades\Auth;
 use Unleash\Client\Configuration\Context;
@@ -19,7 +19,7 @@ class UnleashContextProvider implements BaseUnleashContextProvider
         if (Auth::check()) {
             $context->setCurrentUserId(Auth::id());
         }
-        
-        return $context;     
+
+        return $context;
     }
 }

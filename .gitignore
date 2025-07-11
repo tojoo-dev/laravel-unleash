@@ -1,6 +1,8 @@
 /vendor
 
-.phpunit.result.cache
+.phpunit.*
+*.bak
+*.cache
 phpunit.xml
 
 composer.phar

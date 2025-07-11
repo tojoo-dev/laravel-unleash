@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash;
+namespace Tojoo\Unleash;
 
 use Unleash\Client\Configuration\Context;
 use Unleash\Client\DTO\Feature;

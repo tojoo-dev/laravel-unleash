@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Facades;
+namespace Tojoo\Unleash\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -21,6 +21,6 @@ class Unleash extends Facade
      */
     protected static function getFacadeAccessor(): string
     {
-        return \JWebb\Unleash\Unleash::class;
+        return \Tojoo\Unleash\Unleash::class;
     }
 }

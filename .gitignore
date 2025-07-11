@@ -1,7 +1,11 @@
 /vendor
 
-.phpunit.result.cache
-phpunit.xml
+.phpunit.*
+.php-cs-fixer.cache
+/.vscode
+/.idea
+/.vscode-test
+*.bak
 
 composer.phar
 composer.lock

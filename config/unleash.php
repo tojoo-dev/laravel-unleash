@@ -87,7 +87,7 @@ return [
     'cache' => [
         'enabled' => env('UNLEASH_CACHE_ENABLED', false),
         'ttl' => env('UNLEASH_CACHE_TTL', 30),
-        'handler' => JWebb\Unleash\Cache\CacheHandler::class
+        'handler' => Tojoo\Unleash\Cache\CacheHandler::class
     ],
 
 
@@ -130,7 +130,7 @@ return [
     |
     */
 
-    'strategy_provider' => JWebb\Unleash\Providers\UnleashStrategiesProvider::class,
+    'strategy_provider' => Tojoo\Unleash\Providers\UnleashStrategiesProvider::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -142,5 +142,5 @@ return [
     |
     */
 
-    'context_provider' => JWebb\Unleash\Providers\UnleashContextProvider::class,
+    'context_provider' => Tojoo\Unleash\Providers\UnleashContextProvider::class,
 ];

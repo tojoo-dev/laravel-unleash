@@ -1,6 +1,6 @@
 <?php
 
-namespace JWebb\Unleash\Cache;
+namespace Tojoo\Unleash\Cache;
 
 use Illuminate\Support\Facades\Cache;
 use Psr\SimpleCache\CacheInterface;
@@ -8,24 +8,21 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * Thanks to leo108 for the `SimpleCacheBridge.php` gist
  * https://gist.github.com/leo108/bd7559654c52000cc9774a80b072c629
+ * 
+ * Compatible with PSR SimpleCache 1.0, 2.0, and 3.0
  */
 class CacheBridge implements CacheInterface
 {
     /**
-     * @param $key
-     * @param  null  $default
-     * @return mixed
+     * Get cache value
      */
-    public function get($key, $default = null): mixed
+    public function get($key, $default = null)
     {
         return Cache::get($key, $default);
     }
 
     /**
-     * @param $key
-     * @param $value
-     * @param  null  $ttl
-     * @return bool
+     * Set cache value
      */
     public function set($key, $value, $ttl = null): bool
     {
@@ -35,8 +32,7 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param $key
-     * @return bool
+     * Delete cache key
      */
     public function delete($key): bool
     {
@@ -52,40 +48,48 @@ class CacheBridge implements CacheInterface
     }
 
     /**
-     * @param array $keys
-     * @param  null  $default
-     * @return array
+     * Get multiple cache values
      */
-    public function getMultiple($keys, $default = null): array
+    public function getMultiple($keys, $default = null): iterable
     {
-        return Cache::many($keys);
+        $keysArray = is_array($keys) ? $keys : iterator_to_array($keys);
+        $values = Cache::many($keysArray);
+
+        // Replace null values with the default value
+        foreach ($keysArray as $key) {
+            if (! isset($values[$key])) {
+                $values[$key] = $default;
+            }
+        }
+
+        return $values;
     }
 
     /**
-     * @param array $values
-     * @param  null  $ttl
-     * @return bool
+     * Set multiple cache values
      */
     public function setMultiple($values, $ttl = null): bool
     {
-        Cache::putMany($values, $ttl);
+        $valuesArray = is_array($values) ? $values : iterator_to_array($values);
+        Cache::putMany($valuesArray, $ttl);
 
         return true;
     }
 
     /**
-     * @param array $keys
+     * Delete multiple cache keys
      */
     public function deleteMultiple($keys): bool
     {
         foreach ($keys as $key) {
             $this->delete($key);
         }
+
+        return true;
     }
 
     /**
-     * @param $key
-     * @return bool
+     * Check if cache key exists
      */
     public function has($key): bool
     {

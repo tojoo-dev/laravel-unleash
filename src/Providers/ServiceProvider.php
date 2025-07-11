@@ -1,12 +1,12 @@
 <?php
 
-namespace JWebb\Unleash\Providers;
+namespace Tojoo\Unleash\Providers;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
-use JWebb\Unleash\Interfaces\UnleashCacheHandlerInterface;
-use JWebb\Unleash\Unleash;
+use Tojoo\Unleash\Interfaces\UnleashCacheHandlerInterface;
+use Tojoo\Unleash\Unleash;
 use Unleash\Client\UnleashBuilder;
 
 class ServiceProvider extends IlluminateServiceProvider
@@ -30,14 +30,14 @@ class ServiceProvider extends IlluminateServiceProvider
                 ->withAppName(config('unleash.environment')) // Same as `withGitlabEnvironment(...)`
                 ->withContextProvider(new $contextProvider())
                 ->withStrategies(...(new $strategyProvider())->getStrategies())
-                ->withAutomaticRegistrationEnabled(!! config('unleash.automatic_registration'))
-                ->withMetricsEnabled(!! config('unleash.metrics'));
+                ->withAutomaticRegistrationEnabled(! ! config('unleash.automatic_registration'))
+                ->withMetricsEnabled(! ! config('unleash.metrics'));
 
-            if (!! config('unleash.http_client_override.enabled')) {
+            if (! ! config('unleash.http_client_override.enabled')) {
                 $builder = $builder->withHttpClient(new Client(config('unleash.http_client_override.config')));
             }
 
-            if (!! config('unleash.cache.enabled')) {
+            if (! ! config('unleash.cache.enabled')) {
                 /** @var UnleashCacheHandlerInterface $cacheHandler */
                 $cacheHandler = config('unleash.cache.handler');
 
@@ -46,7 +46,7 @@ class ServiceProvider extends IlluminateServiceProvider
                     config('unleash.cache.ttl')
                 );
             }
-            if (!! config('unleash.api_key')) {
+            if (! ! config('unleash.api_key')) {
                 $builder = $builder->withHeader('Authorization', config('unleash.api_key'));
             }
 
@@ -74,7 +74,7 @@ class ServiceProvider extends IlluminateServiceProvider
         });
 
         Blade::if('featureDisabled', function (string $feature) {
-            return !app(Unleash::class)->isEnabled($feature);
+            return ! app(Unleash::class)->isEnabled($feature);
         });
     }
 

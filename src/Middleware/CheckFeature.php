@@ -1,9 +1,9 @@
 <?php
 
-namespace JWebb\Unleash\Middleware;
+namespace Tojoo\Unleash\Middleware;
 
 use Closure;
-use JWebb\Unleash\Unleash;
+use Tojoo\Unleash\Unleash;
 
 class CheckFeature
 {
@@ -17,7 +17,7 @@ class CheckFeature
      */
     public function handle($request, Closure $next, $featureName)
     {
-        if (!app(Unleash::class)->isEnabled($featureName)) {
+        if (! app(Unleash::class)->isEnabled($featureName)) {
             abort(404);
         }
 
